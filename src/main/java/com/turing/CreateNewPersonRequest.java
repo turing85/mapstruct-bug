@@ -1,9 +1,8 @@
 package com.turing;
 
-import java.util.Objects;
 import java.util.UUID;
 
-public class CreateNewPersonRequest {
+public class CreateNewPersonRequest implements Correlated {
   private final String name;
   private final String email;
   private final UUID correlationId;
@@ -26,6 +25,7 @@ public class CreateNewPersonRequest {
     return email;
   }
 
+  @Override
   public UUID getCorrelationId() {
     return correlationId;
   }
@@ -39,7 +39,7 @@ public class CreateNewPersonRequest {
       return name;
     }
 
-    public Builder setName(String name) {
+    public Builder name(String name) {
       this.name = name;
       return this;
     }
@@ -48,19 +48,16 @@ public class CreateNewPersonRequest {
       return email;
     }
 
-    public Builder setEmail(String email) {
+    public Builder email(String email) {
       this.email = email;
       return this;
     }
 
     public UUID getCorrelationId() {
-      if (Objects.isNull(correlationId)) {
-        correlationId = UUID.randomUUID();
-      }
       return correlationId;
     }
 
-    public Builder setCorrelationId(UUID correlationId) {
+    public Builder correlationId(UUID correlationId) {
       this.correlationId = correlationId;
       return this;
     }
@@ -69,5 +66,4 @@ public class CreateNewPersonRequest {
       return new CreateNewPersonRequest(getName(), getEmail(), getCorrelationId());
     }
   }
-
 }
